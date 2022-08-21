@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Diagnostics;
+using WeatherBot.Interfaces;
 using WeatherBot.Models;
 
 namespace WeatherBot.Controllers
@@ -8,15 +9,19 @@ namespace WeatherBot.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        //refrence interface as a readonly to make it closed for modifictation, allows refrence to method.
+        private readonly IHomeViewModelBuilder _homeViewModelBuilder;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IHomeViewModelBuilder homeViewModelBuilder)
         {
             _logger = logger;
+            //define what the Ineterface is and remove the concrete depandency on the viewmodelbuilder
+            _homeViewModelBuilder = homeViewModelBuilder;
         }
 
         public IActionResult Index()
         {
-            apiCall();
+            _homeViewModelBuilder.Build();
             return View();
         }
 
