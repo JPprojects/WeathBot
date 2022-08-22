@@ -1,9 +1,7 @@
 ﻿namespace WeatherBot.Models
 {
-    public class HomeViewModel
+    public class HomeViewModel: WeatherModel
     {
-        public string Weather { get; set; }
-
-        public string Location { get; set; }
+        public string Status { get; set; }
     }
 }

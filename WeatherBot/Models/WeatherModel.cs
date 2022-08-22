@@ -1,6 +1,6 @@
 ﻿namespace WeatherBot.Models
 {
-    public class WeatherModel
+    public class WeatherModel 
     {
         public string Weather { get; set; }
 
