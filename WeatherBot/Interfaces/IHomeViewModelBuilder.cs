@@ -1,7 +1,9 @@
-﻿namespace WeatherBot.Interfaces
+﻿using WeatherBot.Models;
+
+namespace WeatherBot.Interfaces
 {
     public interface IHomeViewModelBuilder
     {
-        string Build();
+        Task<HomeViewModel> BuildAsync();
     }
 }

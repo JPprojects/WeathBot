@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Diagnostics;
 using WeatherBot.Interfaces;
@@ -21,8 +22,8 @@ namespace WeatherBot.Controllers
 
         public IActionResult Index()
         {
-            _homeViewModelBuilder.Build();
-            return View();
+            var viewmodel = _homeViewModelBuilder.BuildAsync();
+            return View(viewmodel);
         }
 
         public IActionResult Privacy()
@@ -34,22 +35,6 @@ namespace WeatherBot.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
-        private void apiCall()
-        {
-            HttpClient client = new HttpClient();
-            var url = "https://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=a3bec6cae5be523e8f91b317166bfe18";
-
-            HttpResponseMessage response = client.GetAsync(url).Result;
-
-
-            if (response.IsSuccessStatusCode)
-            {
-                var readableResult = response.Content.ReadAsStringAsync();
-                // Parse the response body.
-                Console.WriteLine(readableResult);
-            }
         }
     }
 }

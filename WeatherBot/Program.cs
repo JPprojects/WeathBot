@@ -1,5 +1,6 @@
 using WeatherBot.Interfaces;
 using WeatherBot.ModelBuilders;
+using WeatherBot.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 //for .net6 you can register the interface and the type here
 builder.Services.AddScoped<IHomeViewModelBuilder, HomeViewModelBuilder>();
+builder.Services.AddScoped<IWeatherAPIService, WeatherApiService>();
+
 
 var app = builder.Build();
 
