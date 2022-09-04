@@ -1,9 +1,14 @@
-﻿namespace WeatherBot.Models
+﻿using Newtonsoft.Json;
+
+namespace WeatherBot.Models
 {
     public class WeatherModel 
     {
-        public string Weather { get; set; }
+        public WeatherListModel Weather { get; set; }
 
-        public string Location { get; set; }
+        public string Name { get; set; }
+
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public Exception ErrorMessage;
     }
 }
