@@ -4,7 +4,7 @@ namespace WeatherBot.Models
 {
     public class WeatherModel 
     {
-        public object Weather { get; set; }
+        public WeatherListModel Weather { get; set; }
 
         public string Name { get; set; }
 

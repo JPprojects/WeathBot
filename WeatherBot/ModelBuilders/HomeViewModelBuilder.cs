@@ -18,27 +18,15 @@ namespace WeatherBot.ModelBuilders
         {
             WeatherModel weather = new WeatherModel();
 
+            //cofigure await can save you reentering the request context. Very helpful if you are trying to parrell calls. 
+            //Just doing await also does this but ConfigureAwait will stop the deadlocks that user may enter with out it
             weather = await _weatherAPIService.ApiCall().ConfigureAwait(false);
 
             HomeViewModel viewModel = new HomeViewModel();
 
             if (weather != null)
             {
-
-                Type myType = weather.Weather.GetType();
-                IList<PropertyInfo> props = new List<PropertyInfo>(myType.GetProperties());
-
-                foreach (PropertyInfo prop in props)
-                {
-                    object propValue = prop.GetValue(weather.Weather, null);
-
-                    propValue.
-
-                    // Do something with propValue
-                }
-
-
-                //viewModel.WeatherDescription = string.Format((str);
+                viewModel.WeatherDescription = weather.Weather.Description;
                 viewModel.Name = weather.Name;
                 viewModel.Status = "Running fine";
             }
@@ -49,23 +37,6 @@ namespace WeatherBot.ModelBuilders
 
 
             return viewModel;
-        }
-
-        private static Dictionary<string, string> GetProperties(object obj)
-        {
-            var props = new Dictionary<string, string>();
-            if (obj == null)
-                return props;
-
-            var type = obj.GetType();
-            foreach (var prop in type.GetProperties())
-            {
-                var val = prop.GetValue(obj, new object[] { });
-                var valStr = val == null ? "" : val.ToString();
-                props.Add(prop.Name, valStr);
-            }
-
-            return props;
         }
     }
 }

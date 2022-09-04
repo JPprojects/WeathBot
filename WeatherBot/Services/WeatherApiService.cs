@@ -25,7 +25,7 @@ namespace WeatherBot.Services
                 }
                 else
                 {
-                    throw new Exception(response.ReasonPhrase);
+                    return null;
                 }
             }
         }
