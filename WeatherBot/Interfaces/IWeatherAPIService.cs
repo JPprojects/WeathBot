@@ -4,6 +4,6 @@ namespace WeatherBot.Interfaces
 {
     public interface IWeatherAPIService
     {
-        Task<WeatherModel> ApiCall();
+        Task<WeatherModel> BuildWeatherModel();
     }
 }
