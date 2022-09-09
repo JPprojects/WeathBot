@@ -4,17 +4,20 @@ namespace WeatherBot.Helpers
 {
     public class ApiHelper
     {
-        //make sure it opens up once per application. This isnt the norm but for this case its okay. Like having one brower
-        public static HttpClient ApiClient { get; set; } 
+        private static readonly HttpClient _httpClient;
 
-        public static void InitializeClient()
+        //Instatiate named client
+        //private static readonly HttpClientFactory _httpClient2;
+        //var client = _httpClient2.CreateClient("weatherApi");
+
+
+        public static async Task<HttpResponseMessage> GetResponseMessage(string url)
         {
-            ApiClient = new HttpClient();
-            ApiClient.BaseAddress = new Uri("https://api.openweathermap.org/data/2.5/");
-            ApiClient.DefaultRequestHeaders.Accept.Clear();
+            HttpResponseMessage response = await _httpClient.GetAsync(url).ConfigureAwait(false);
 
-            //this adds a header that say give me json this makes it easier to parse into the models
-            //ApiClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            if (!response.IsSuccessStatusCode) { return null; }
+
+            return response;
         }
     }
 }

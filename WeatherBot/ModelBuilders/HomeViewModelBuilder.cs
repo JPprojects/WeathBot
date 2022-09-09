@@ -20,7 +20,7 @@ namespace WeatherBot.ModelBuilders
 
             //cofigure await can save you reentering the request context. Very helpful if you are trying to parrell calls. 
             //Just doing await also does this but ConfigureAwait will stop the deadlocks that user may enter with out it
-            weather = await _weatherAPIService.ApiCall().ConfigureAwait(false);
+            weather = await _weatherAPIService.BuildWeatherModel().ConfigureAwait(false);
 
             HomeViewModel viewModel = new HomeViewModel();
 
