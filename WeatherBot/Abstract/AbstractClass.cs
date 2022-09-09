@@ -15,6 +15,7 @@
             {
                 Console.WriteLine("Zzz");
             }
+            //add a vitual method
         }
 
         class Junior : SoftwareEngineer
@@ -25,6 +26,8 @@
                 Console.WriteLine("Junior is coding");
             }
         }
+        
+        //add another clase that has the virtual method override
 
         class Program
         {
