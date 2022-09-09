@@ -17,7 +17,7 @@ namespace WeatherBot.Services
             using (response)
             {               
                 //readAsAsync will take the json and try to convert it to the weather model, does not care about anything thats not in the model
-                WeatherModel weather = await response.Content.ReadAsAsync<WeatherModel>();
+                var weather = await response.Content.ReadAsAsync<WeatherModel>();
 
                 return weather;
             }

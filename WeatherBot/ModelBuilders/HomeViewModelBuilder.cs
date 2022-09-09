@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-using System.Reflection;
-using WeatherBot.Interfaces;
+﻿using WeatherBot.Interfaces;
 using WeatherBot.Models;
 
 namespace WeatherBot.ModelBuilders
@@ -16,18 +14,18 @@ namespace WeatherBot.ModelBuilders
 
         public async Task<HomeViewModel> BuildAsync()
         {
-            WeatherModel weather = new WeatherModel();
+            var Weather = new WeatherModel();
 
             //cofigure await can save you reentering the request context. Very helpful if you are trying to parrell calls. 
             //Just doing await also does this but ConfigureAwait will stop the deadlocks that user may enter with out it
-            weather = await _weatherAPIService.BuildWeatherModel().ConfigureAwait(false);
+            Weather = await _weatherAPIService.BuildWeatherModel().ConfigureAwait(false);
 
-            HomeViewModel viewModel = new HomeViewModel();
+            var viewModel = new HomeViewModel();
 
-            if (weather != null)
+            if (Weather != null)
             {
-                viewModel.WeatherDescription = weather.Weather.Description;
-                viewModel.Name = weather.Name;
+                viewModel.WeatherDescription = Weather.Weather.Description;
+                viewModel.Name = Weather.Name;
                 viewModel.Status = "Running fine";
             }
             else
